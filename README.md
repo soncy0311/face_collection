@@ -48,6 +48,8 @@ python main.py
 
 - 결과 파일 result 폴더로 저장 -> result 폴더 확인
 
+<br>
+
 ### 접근 방법
 - 처음에는 stable diffusion 모델을 활용하여 이미지 수정을 하려고 시도했지만, 모델이 너무 크고, finetuning을 하지 않을경우 결과가 좋게 나오지 않아 포기
 - 2 번째로 얼굴의 각 부위를 segmentation을 통해 구분하고 특정 부분을 보정하는 작업을 진행하려 했지만, segmentation은 잘됐지만, 특정 부분의 명칭이 틀리거나, 좌표값을 얻기 어려워서 포기
