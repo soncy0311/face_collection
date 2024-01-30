@@ -1,2 +1,4 @@
-data/*
-result/*
+.jpg
+.png
+
+__pycache__

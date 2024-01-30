@@ -1,8 +1,10 @@
 import sys
+import os
 import numpy as np
 import cv2
 import dlib
 from glob import glob
+from tqdm import tqdm
 
 from utils.tools import zoom, liquify
 from utils.config import CFG
@@ -14,7 +16,7 @@ def face_collect(path:str,config:CFG) :
     config: 성형 비율 파라미터 값
     '''
     detector = dlib.get_frontal_face_detector()
-    predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
+    predictor = dlib.shape_predictor('./models/shape_predictor_68_face_landmarks.dat')
 
     ALL = list(range(0, 68))
     RIGHT_EYEBROW = list(range(17, 22)) 
@@ -65,10 +67,14 @@ def face_collect(path:str,config:CFG) :
 if __name__ == "__main__" :
     config = CFG()
 
-    image_path = glob("./data/*.jpg")
-    result_path = "./result/"
+    current_path = os.getcwd()
+    os.makedirs(current_path+"/result",exist_ok=True)
 
-    for path in image_path :
+    image_path = [current_path+"/data/"+file for file in os.listdir(current_path+"/data/")
+                    if file.endswith(".jpg") or file.endswith(".png")]
+    result_path = current_path+"/result/"
+
+    for path in tqdm(image_path) :
         image_name = path.split("/")[-1]
         result = face_collect(path,config)
         cv2.imwrite(result_path+image_name,result)
